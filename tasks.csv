@@ -1,0 +1,4 @@
+原形,校对前,校对后,候选项
+example1,pre_word1,,example1_1:10;example1_2:5
+example2,pre_word2,,example2_1:7;example2_2:3;example2_3:1
+example3,pre_word3,,example3_1:4;example3_2:6
