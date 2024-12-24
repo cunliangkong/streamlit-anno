@@ -117,17 +117,18 @@ def main():
     # 2. 侧边栏展示已标注列表
     st.sidebar.subheader("已标注任务列表（最近500条）")
     df_annotated = df_progress[df_progress["校对后"].notna() & (df_progress["校对后"] != "")]
-    df_annotated = df_annotated.iloc[::-1].iloc[:500].reset_index(drop=True)
+    # df_annotated = df_annotated.iloc[::-1].iloc[:500].reset_index(drop=True)
+    df_annotated = df_annotated.iloc[::-1].iloc[:500].reset_index(drop=False)
     if df_annotated.empty:
         st.sidebar.write("目前还没有已校对的任务。")
     else:
         for i, row in df_annotated.iterrows():
             origin_word = row["原形"]
             corrected = row["校对后"]
-            if st.sidebar.button(f"{origin_word} ({corrected})", key=f"sidebar_{i}"):
+            if st.sidebar.button(f"{origin_word} | {corrected}", key=f"sidebar_{i}"):
                 # 翻页前先保存当前记录
                 save_current_selection()
-                st.session_state["current_index"] = i
+                st.session_state["current_index"] = row["index"]
                 load_current_selection()
                 st.rerun()
 
