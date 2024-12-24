@@ -36,6 +36,7 @@ def load_progress():
         for col in ["原形", "校对前", "校对后", "候选项"]:
             if col not in df_progress.columns:
                 df_progress[col] = ""
+        df_progress["校对后"] = df_progress["校对后"].fillna("").astype(str)
         return df_progress
     else:
         df_tasks = load_tasks()
